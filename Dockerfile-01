@@ -1,0 +1,14 @@
+FROM python:3.9-slim
+
+#COPY ./main.py:/usr/local/
+
+# Install geopandas and its dependencies
+RUN apt-get update && apt-get install -y \
+    python3-rtree \
+    python3-fiona \
+    python3-geopandas \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+CMD  ["echo", "installationok"]
+# CMD ["python", "app.py"]
