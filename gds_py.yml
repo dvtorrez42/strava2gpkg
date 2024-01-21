@@ -28,10 +28,10 @@ dependencies:
   - ipyleaflet
   - ipympl
   - ipywidgets
-  - jupyterlab>=4.0
-  - jupyter_bokeh
-  - jupyter-book
-  - jupytext
+    #- jupyterlab>=4.0
+    #- jupyter_bokeh
+    #- jupyter-book
+    #- jupytext
   - legendgram
   - libgdal-arrow-parquet
   - lxml
