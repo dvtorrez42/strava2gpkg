@@ -51,10 +51,10 @@ def gpx_to_gdf(file_paths):
                 
 
 def main():
-    directory_path = './'
+    directory_path = '../usr/local/strava/'
     zip_file_path = get_zip_file(directory_path)
 
-    destination_path = './data/'
+    destination_path = '../usr/local/strava/data/'
     starts_with = 'activities'
     extract_desired_files(zip_file_path=zip_file_path,
                          destination_path=destination_path,
@@ -64,7 +64,7 @@ def main():
     gpx_files = [os.path.join(gpx_directory, file) for file in os.listdir(gpx_directory) if file.endswith('.gpx')]
 
     strava_gdf = gpx_to_gdf(gpx_files)
-    strava_gdf.to_file(f"./strava_{datetime.today().strftime('%Y-%m-%d')}.gpkg", 
+    strava_gdf.to_file(f"../usr/local/strava/strava_{datetime.today().strftime('%Y-%m-%d')}.gpkg", 
                         driver='GPKG', 
                         layer=f"bike_{datetime.today().strftime('%Y-%m-%d')}")
     
