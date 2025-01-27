@@ -92,3 +92,16 @@ data/
 
 # Mypy cache
 .mypy_cache/
+
+# Other
+*.ipynb
+activities.csv
+activities/
+activities_gpx/
+.venv/
+notebooks/
+*.gpkg
+notes.md
+*.zip
+strava_2024-01-19.gpkg
+*.sqlite
