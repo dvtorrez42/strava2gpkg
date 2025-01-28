@@ -8,5 +8,10 @@ dependencies = [
     "fitdecode>=0.10.0",
     "geopandas>=1.0.1",
     "gpxpy>=1.6.2",
+]
+
+[dependency-groups]
+dev = [
     "jupyter>=1.1.1",
+    "matplotlib>=3.10.0",
 ]

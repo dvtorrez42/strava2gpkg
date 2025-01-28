@@ -37,14 +37,14 @@ def gpx_to_gdf(gpx_files):
             try:
                 gdf = gpd.read_file(file_path, layer='tracks')
                 if gdf.shape[0]>0:
-                    gdf = gdf[['name', 'type', 'geometry']]
-                    gdf['id'] = file_name_clean.lstrip('./activities')
+                    gdf = gdf[['name', 'type', 'geometry']]  # also build for gpx native and keep link1_href for both
+                    gdf['id'] = file_name_clean.lstrip('.data/').lstrip('activities/').lstrip('gpx_from_fit/')
                     gdf = gdf.set_index('id')
                     gdf_list.append(gdf)
             except:
                 print("Error", file_path)
 
-    gdf_all = pd.concat(gdf_list, ignore_index=False)
+    gdf_all = pd.concat(gdf_list)
     return gdf_all
 
 
@@ -87,8 +87,8 @@ def read_activities(activities_file_path):  # TODO: parse dates
     # Filter out columns that are not in the file
     valid_columns = [col for col in activities_cols if col in available_columns]
     
-    activities = pd.read_csv(activities_file_path, usecols=valid_columns, parse_dates=False)  # TODO:parse dates , index_col='Nombre de archivo'
-    activities['Nombre de archivo'] = activities['Nombre de archivo'].map(lambda x: x.lstrip('activities/').rstrip('gpx').rstrip('.fit.gz'))
+    activities = pd.read_csv(activities_file_path, usecols=valid_columns, parse_dates=False)  # TODO:parse dates
+    activities['Nombre de archivo'] = activities['Nombre de archivo'].map(lambda x: x.lstrip('.data/').lstrip('activities/').lstrip('gpx_from_fit/').rstrip('.gpx').rstrip('.fit.gz'))
     activities = activities.set_index('Nombre de archivo')
     activities.index.names = ['id']
     return activities

@@ -354,9 +354,10 @@ class StravaConverter(Converter):
             # Step 3.2: Identify FIT file metadata from Strava log
             # -- identify corresponding activity in md
             md = df_acts.loc[df_acts['Nombre de archivo'].str.contains(f_activity)].iloc[0, :].to_dict()
-            act_id = md['Activity ID']
-            act_name = md['Activity Name']
-            act_desc = md['Activity Description']
+            act_filename = md['Nombre de archivo'].lstrip('.data/').lstrip('activities/').lstrip('gpx_from_fit/').rstrip('.gpx').rstrip('.fit.gz')
+            act_id = md['Id. de actividad']
+            act_name = md['Nombre de la actividad']
+            act_desc = md['Descripción de la actividad']
 
             # -- check on values
             if not act_name.isascii():
@@ -370,7 +371,7 @@ class StravaConverter(Converter):
             # -- assign desired metadata
             strava_args = {
                 'gpx_name': act_name,
-                'gpx_type': md['Activity Type'],
+                'gpx_type': md['Tipo de actividad'],
                 'gpx_desc': act_desc,
                 'gpx_link': f"https://www.strava.com/activities/{act_id}"
             }
@@ -386,7 +387,7 @@ class StravaConverter(Converter):
             )
 
             # Step 3.4: Save gpx
-            path_out = self._dir_out + f'{act_id}.gpx'
+            path_out = self._dir_out + f'{act_filename}.gpx'
             with open(path_out, 'w') as f:
                 f.write(gpx.to_xml())
 

@@ -105,3 +105,4 @@ notes.md
 *.zip
 strava_2024-01-19.gpkg
 *.sqlite
+.qodo/
